@@ -1,0 +1,8 @@
+<!-- Most valid html will work in here, excluding images. -->
+
+<h1>Welcome to Concordia!</h1>
+
+<i>A server filled with schizophrenic people and brazilians, all foreigners are welcome! The main language is English, but we have some Russian, and some Brazilian players.</i><br>
+<i>We have a unique combat, ballistic, and medical system. Currently we're running on regular SS13 code but are working on making the game different overall.</i><br>
+<i>Have fun bruh we appreciate you playing here</i><br>
+<i>Join our discord: <i><b><a href='https://discord.gg/6t4at7HqX3%27%3Ehttps://discord.gg/6t4at7HqX3</a></b></i>
