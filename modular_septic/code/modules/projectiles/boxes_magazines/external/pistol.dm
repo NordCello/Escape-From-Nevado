@@ -134,6 +134,7 @@
 
 /obj/item/ammo_box/magazine/pm9
 	name = "PM9 Evil Magazine (nine milie meter)"
+	desc = "A magazine imbued with evil energy."
 	icon = 'modular_septic/icons/obj/items/ammo/pistol.dmi'
 	icon_state = "cunny"
 	base_icon_state = "cunny"

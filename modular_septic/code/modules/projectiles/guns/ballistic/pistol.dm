@@ -348,10 +348,12 @@
 	carry_weight = 2 KILOGRAMS
 	custom_price = 5500
 
+//The ultimate gun of all time
 /obj/item/gun/ballistic/automatic/pistol/remis/pm9
-	name = "\improper PM9 Evil Gun"
+	name = "\proper PM9 Evil Gun"
 	desc = "This is a strown together pack of metal that has just enough things touching eachother in the certain way to not burst in your hands when you fire. \
-	A unholy abomination, a devious, godforsaken handgun. Use it with care."
+			A unholy abomination, a devious, godforsaken handgun. Use it with care. \
+			At least 3 infants, 2 puppies and 3 pipes from home depot were sacrificed to make this."
 	icon = 'modular_septic/icons/obj/items/guns/pistol.dmi'
 	lefthand_file = 'modular_septic/icons/obj/items/guns/inhands/pistol_lefthand.dmi'
 	righthand_file = 'modular_septic/icons/obj/items/guns/inhands/pistol_righthand.dmi'
@@ -361,6 +363,12 @@
 	gunshot_animation_information = list(
 		"pixel_x" = 16, \
 		"pixel_y" = 2, \
+	)
+	recoil_animation_information = list(
+		"recoil_angle_upper" = -10, \
+		"recoil_angle_lower" = -20, \
+		"recoil_burst_speed" = 0.5, \
+		"return_burst_speed" = 0.5, \
 	)
 	client_recoil_animation_information = list(
 		"strength" = 1,
@@ -375,20 +383,33 @@
 	load_empty_sound = 'modular_septic/sound/weapons/guns/pistol/pm9_magin.wav'
 	eject_sound = 'modular_septic/sound/weapons/guns/pistol/pm9_magout.wav'
 	eject_empty_sound = 'modular_septic/sound/weapons/guns/pistol/pm9_magout.wav'
-	force = 15
-	fire_delay = 2
+	min_force = 10
+	force = 12
+	min_force_strength = 0.5
+	force_strength = 0.6
+	fire_delay = 1
+	full_auto = TRUE
+	skill_ranged = SKILL_SMG
 	mag_type = /obj/item/ammo_box/magazine/pm9
-	bolt_type = BOLT_TYPE_LOCKING
-	w_class = WEIGHT_CLASS_NORMAL
+	bolt_type = BOLT_TYPE_OPEN
+	weapon_weight = WEAPON_LIGHT
 	suppressor_x_offset = 9
-	carry_weight = 2
-	custom_price = 5500
+	w_class = WEIGHT_CLASS_SMALL
+	carry_weight = 0.5 KILOGRAMS
+	tetris_width = 64
+	tetris_height = 64
+	custom_price = 100000
+
+/obj/item/gun/ballistic/automatic/pistol/remis/pm9/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/poopmadness, /obj/item/ammo_casing/c9mm/evil)
 
 /obj/item/gun/ballistic/automatic/pistol/remis/pm9/desc_chaser(mob/user)
-	. = list()
-	var/image_src = image2html('modular_septic/images/pm9.gif', user, format = "gif", sourceonly = TRUE)
-	. += "<img src='[image_src]' width=128 height=96>"
-	. += ..()
+	. = ..()
+	//chance to display evil gun gif in chat
+	if(prob(20))
+		var/image_src = image2html('modular_septic/images/pm9.gif', user, format = "gif", sourceonly = TRUE)
+		. += "<img src='[image_src]' width=128 height=96>"
 
 /obj/item/gun/ballistic/automatic/pistol/remis/pm9/attackby(obj/item/A, mob/user, params)
 	if(istype(A, /obj/item/suppressor))
