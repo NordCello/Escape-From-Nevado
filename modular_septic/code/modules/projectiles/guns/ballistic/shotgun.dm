@@ -345,16 +345,16 @@
 	fire_sound = list('modular_septic/sound/weapons/guns/shotgun/spas1.ogg', 'modular_septic/sound/weapons/guns/shotgun/spas2.ogg')
 	fold_open_sound = 'modular_septic/sound/weapons/guns/rifle/ak_stock_open.wav'
 	fold_close_sound = 'modular_septic/sound/weapons/guns/rifle/ak_stock_close.wav'
-	var/semi = FALSE
-	var/spas_semi_click = 'modular_septic/sound/weapons/guns/shotgun/spas_click.ogg'
 	foldable = TRUE
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/spas
+	var/semi = FALSE
+	var/spas_semi_click = 'modular_septic/sound/weapons/guns/shotgun/spas_click.ogg'
 
 /obj/item/gun/ballistic/shotgun/denominator/attack_self_tertiary(mob/user, modifiers)
 	. = ..()
-	if(bolt_locked || (!safety_flags & GUN_SAFETY_ENABLED))
+	if(bolt_locked || (safety_flags & GUN_SAFETY_ENABLED))
 		var/wontbudge = "The switch won't budge."
-		if(!safety_flags & GUN_SAFETY_ENABLED)
+		if(safety_flags & GUN_SAFETY_ENABLED)
 			wontbudge += span_warning(" The safety has to be off.")
 		if(bolt_locked)
 			wontbudge += span_danger(" The pump has to be forward.")

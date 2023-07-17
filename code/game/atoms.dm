@@ -1736,6 +1736,7 @@
 	var/list/params = old_filter_data.Copy()
 	for(var/thing in new_params)
 		params[thing] = new_params[thing]
+	new_params -= "type"
 
 	animate(filter, new_params, time = time, easing = easing, loop = loop)
 	for(var/param in params)

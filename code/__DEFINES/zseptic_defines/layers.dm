@@ -261,6 +261,7 @@
 #define STATIC_FLASH_LAYER 8
 #define BLIND_IMAGE_LAYER 9
 #define INSIGNIA_LAYER 10
+#define JUMPSCARE_LAYER 11
 ///--------------- FULLSCREEN IMAGES ------------
 
 ///Plane for sound hints

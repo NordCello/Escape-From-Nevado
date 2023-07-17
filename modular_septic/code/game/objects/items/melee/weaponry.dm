@@ -1,3 +1,7 @@
+#define SLASH_MODE 1
+#define STAB_MODE 2
+#define BASH_MODE 3
+
 /obj/item/knife
 	skill_melee = SKILL_KNIFE
 	carry_weight = 400 GRAMS
@@ -88,6 +92,25 @@
 	var/bash_hitsound = list('modular_septic/sound/weapons/melee/baton1.wav', 'modular_septic/sound/weapons/melee/baton2.wav', 'modular_septic/sound/weapons/melee/baton3.wav')
 	var/current_atk_mode = null
 
+/obj/item/changeable_attacks/Initialize(mapload)
+	. = ..()
+	if(current_atk_mode == SLASH_MODE)
+		hitsound = slash_hitsound
+	if(current_atk_mode == STAB_MODE)
+		hitsound = stab_hitsound
+	if(current_atk_mode == BASH_MODE)
+		hitsound = bash_hitsound
+
+/obj/item/changeable_attacks/examine(mob/user)
+	. = ..()
+	switch(current_atk_mode)
+		if(SLASH_MODE)
+			. += span_notice("Currently slashing.")
+		if(STAB_MODE)
+			. += span_notice("Currently stabbing.")
+		if(BASH_MODE)
+			. += span_notice("Currently bashing.")
+
 /obj/item/changeable_attacks/attack_self(mob/user, modifiers)
 	. = ..()
 	swap_intents(user)
@@ -101,10 +124,6 @@
 		to_chat(user, span_warning("There's no other ways to attack with this weapon."))
 		return
 	user.playsound_local(get_turf(src), 'modular_septic/sound/weapons/melee/swap_intent.ogg', 5, FALSE)
-
-#define SLASH_MODE 1
-#define STAB_MODE 2
-#define BASH_MODE 3
 
 /obj/item/changeable_attacks/sword
 	name = "Nice Sword"
@@ -139,15 +158,6 @@
 	skill_melee = SKILL_SHORTSWORD
 	tetris_width = 32
 	tetris_height = 96
-
-/obj/item/changeable_attacks/sword/Initialize(mapload)
-	. = ..()
-	if(current_atk_mode == SLASH_MODE)
-		hitsound = slash_hitsound
-	if(current_atk_mode == STAB_MODE)
-		hitsound = stab_hitsound
-	if(current_atk_mode == BASH_MODE)
-		hitsound = bash_hitsound
 
 /obj/item/changeable_attacks/sword/swap_intents(mob/user)
 	. = ..()
@@ -217,7 +227,7 @@
 /obj/item/changeable_attacks/skindeep/swap_intents(mob/user)
 	. = ..()
 	switch(current_atk_mode)
-		if(slash)
+		if(SLASH_MODE)
 			to_chat(user, span_notice("I'm now stabbing them with the slanted pointy end of the [src].")) //It's not that great at stabbing
 			hitsound = stab_hitsound
 			min_force = 8
@@ -226,7 +236,7 @@
 			force_strength = 2
 			current_atk_mode = STAB_MODE
 			sharpness = SHARP_POINTY
-		if(stab)
+		if(STAB_MODE)
 			to_chat(user, span_notice("I'm now bashing with the hilt of the [src]."))
 			hitsound = bash_hitsound
 			min_force = 6
@@ -235,7 +245,7 @@
 			force_strength = 1.65
 			current_atk_mode = BASH_MODE
 			sharpness = NONE
-		if(bash)
+		if(BASH_MODE)
 			to_chat(user, span_notice("I'm now slicing with the [src]."))
 			hitsound = slash_hitsound
 			min_force = 13

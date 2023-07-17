@@ -289,6 +289,8 @@
 	if(iscarbon(L))
 		var/mob/living/carbon/carbon_mob = L
 		carbon_mob.immunity -= 25
+		if(overdosed)
+			carbon_mob.immunity += 75
 
 /datum/reagent/medicine/spaceacillin/overdose_start(mob/living/M)
 	. = ..()
