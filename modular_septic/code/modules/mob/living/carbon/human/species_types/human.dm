@@ -1,8 +1,6 @@
 /datum/species/human
 	mutant_bodyparts = list()
 	default_mutant_bodyparts = list(
-		"ears" = "None",
-		"tail" = "None",
 		"dick" = "Dick",
 		"tits" = "Tits",
 	)

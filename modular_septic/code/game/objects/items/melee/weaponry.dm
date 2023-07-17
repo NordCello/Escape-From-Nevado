@@ -88,11 +88,6 @@
 	var/bash_hitsound = list('modular_septic/sound/weapons/melee/baton1.wav', 'modular_septic/sound/weapons/melee/baton2.wav', 'modular_septic/sound/weapons/melee/baton3.wav')
 	var/current_atk_mode = null
 
-/obj/item/changeable_attacks/examine(mob/user)
-	. = ..()
-	if(current_atk_mode)
-		. += span_info("It's currently ready to [current_atk_mode]")
-
 /obj/item/changeable_attacks/attack_self(mob/user, modifiers)
 	. = ..()
 	swap_intents(user)
@@ -107,9 +102,9 @@
 		return
 	user.playsound_local(get_turf(src), 'modular_septic/sound/weapons/melee/swap_intent.ogg', 5, FALSE)
 
-#define slash 1
-#define stab 2
-#define bash 3
+#define SLASH_MODE 1
+#define STAB_MODE 2
+#define BASH_MODE 3
 
 /obj/item/changeable_attacks/sword
 	name = "Nice Sword"
@@ -125,14 +120,15 @@
 	pickup_sound = 'modular_septic/sound/weapons/melee/kukri_deploy.wav'
 	miss_sound = list('modular_septic/sound/weapons/melee/kukri_swish1.wav', 'modular_septic/sound/weapons/melee/kukri_swish2.wav', 'modular_septic/sound/weapons/melee/kukri_swish3.wav')
 	drop_sound = list('modular_septic/sound/weapons/melee/bladedrop1.wav', 'modular_septic/sound/weapons/melee/bladedrop2.wav')
-	current_atk_mode = slash
+	current_atk_mode = SLASH_MODE
 	min_force = 6
 	force = 10
 	min_force_strength = 1
 	force_strength = 1.8
-	min_throwforce = 5
-	min_throwforce_strength = 8
-	throwforce_strength = 1.2
+	min_throwforce = 4
+	throwforce = 8
+	min_throwforce_strength = 1
+	throwforce_strength = 1.5
 	wound_bonus = 5
 	bare_wound_bonus = 1
 	flags_1 = CONDUCT_1
@@ -146,42 +142,42 @@
 
 /obj/item/changeable_attacks/sword/Initialize(mapload)
 	. = ..()
-	if(current_atk_mode == slash)
+	if(current_atk_mode == SLASH_MODE)
 		hitsound = slash_hitsound
-	if(current_atk_mode == stab)
+	if(current_atk_mode == STAB_MODE)
 		hitsound = stab_hitsound
-	if(current_atk_mode == bash)
+	if(current_atk_mode == BASH_MODE)
 		hitsound = bash_hitsound
 
 /obj/item/changeable_attacks/sword/swap_intents(mob/user)
 	. = ..()
 	switch(current_atk_mode)
-		if(slash)
+		if(SLASH_MODE)
 			to_chat(user, span_notice("I'm now stabbing them with the pointy end of the [src]."))
 			hitsound = stab_hitsound
 			min_force = 6
 			force = 10
 			min_force_strength = 1
 			force_strength = 1.8
-			current_atk_mode = stab
+			current_atk_mode = STAB_MODE
 			sharpness = SHARP_POINTY
-		if(stab)
+		if(STAB_MODE)
 			to_chat(user, span_notice("I'm now bashing with the hilt of the [src]."))
 			hitsound = bash_hitsound
 			min_force = 6
 			force = 10
 			min_force_strength = 0.6
 			force_strength = 1.65
-			current_atk_mode = bash
+			current_atk_mode = BASH_MODE
 			sharpness = NONE
-		if(bash)
+		if(BASH_MODE)
 			to_chat(user, span_notice("I'm now slicing with the [src]."))
 			hitsound = slash_hitsound
 			min_force = 6
 			force = 10
 			min_force_strength = 1
 			force_strength = 1.8
-			current_atk_mode = slash
+			current_atk_mode = SLASH_MODE
 			sharpness = SHARP_EDGED
 
 /obj/item/changeable_attacks/sword/kukri
@@ -196,7 +192,7 @@
 	righthand_file = 'modular_septic/icons/obj/items/melee/inhands/sword_righthand.dmi'
 	icon_state = "skin_cleaver"
 	inhand_icon_state = "skin_cleaver"
-	current_atk_mode = slash
+	current_atk_mode = SLASH_MODE
 	slash_hitsound = list('modular_septic/sound/weapons/melee/heavysharp_slash1.ogg', 'modular_septic/sound/weapons/melee/heavysharp_slash2.ogg', 'modular_septic/sound/weapons/melee/heavysharp_slash3.ogg')
 	pickup_sound = 'modular_septic/sound/weapons/melee/heavysharp_deploy.ogg'
 	miss_sound = list('modular_septic/sound/weapons/melee/heavysharp_swish1.ogg', 'modular_septic/sound/weapons/melee/heavysharp_swish2.ogg', 'modular_septic/sound/weapons/melee/heavysharp_swish3.ogg')
@@ -228,7 +224,7 @@
 			force = 10
 			min_force_strength = 1.5
 			force_strength = 2
-			current_atk_mode = stab
+			current_atk_mode = STAB_MODE
 			sharpness = SHARP_POINTY
 		if(stab)
 			to_chat(user, span_notice("I'm now bashing with the hilt of the [src]."))
@@ -237,7 +233,7 @@
 			force = 9
 			min_force_strength = 0.65
 			force_strength = 1.65
-			current_atk_mode = bash
+			current_atk_mode = BASH_MODE
 			sharpness = NONE
 		if(bash)
 			to_chat(user, span_notice("I'm now slicing with the [src]."))
@@ -246,12 +242,8 @@
 			force = 25
 			min_force_strength = 1.3
 			force_strength = 2.5
-			current_atk_mode = slash
+			current_atk_mode = SLASH_MODE
 			sharpness = SHARP_EDGED
-
-#undef slash
-#undef stab
-#undef bash
 
 /obj/item/kukri
 	name = "Kukri"
@@ -384,3 +376,7 @@
 /obj/item/dualsaber
 	parrying_modifier = 2
 	skill_melee = SKILL_FORCESWORD
+
+#undef SLASH_MODE
+#undef STAB_MODE
+#undef BASH_MODE
