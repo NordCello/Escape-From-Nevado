@@ -213,7 +213,7 @@
 		var/target_area = parse_zone(check_zone(user.zone_selected))
 		playsound(user, weapon.miss_sound, weapon.get_clamped_volume(), extrarange = weapon.stealthy_audio ? SILENCED_SOUND_EXTRARANGE : -1, falloff_distance = 0)
 		user.visible_message(span_danger("<b>[user]</b> tries to [attack_message] <b>[src]</b>'s [target_area] with [weapon], but misses!"), \
-				span_userdanger("I try to [attack_message] <b>[src]</b>'s [target_area] with my [weapon], but miss!"), \
+				span_userdanger("I try to [attack_message] <b>[victim]</b>'s [target_area] with my [weapon], but miss!"), \
 				span_hear("I hear a swoosh!"), \
 				vision_distance = COMBAT_MESSAGE_RANGE, \
 				ignored_mobs = victim)
