@@ -172,7 +172,7 @@
 		jumpscare.flash_scare(madman)
 	if(prob(2))
 		playsound(weapon, 'modular_septic/sound/insanity/poopmadness/atumalaka.ogg', vol = 80, vary = FALSE)
-		weapon.audible_message(" laughs.", audible_message_flags = EMOTE_MESSAGE)
+		weapon.audible_message("laughs.", audible_message_flags = EMOTE_MESSAGE)
 
 /datum/component/poopmadness/proc/violent_death(mob/living/source, gibbed)
 	SIGNAL_HANDLER
