@@ -352,8 +352,7 @@
 /obj/item/gun/ballistic/automatic/pistol/remis/pm9
 	name = "\proper PM9 Evil Gun"
 	desc = "This is a strown together pack of metal that has just enough things touching eachother in the certain way to not burst in your hands when you fire. \
-			A unholy abomination, a devious, godforsaken handgun. Use it with care. \
-			At least 3 infants, 2 puppies and 3 pipes from home depot were sacrificed to make this."
+			A unholy abomination, a devious, godforsaken handgun. Use it with care."
 	icon = 'modular_septic/icons/obj/items/guns/pistol.dmi'
 	lefthand_file = 'modular_septic/icons/obj/items/guns/inhands/pistol_lefthand.dmi'
 	righthand_file = 'modular_septic/icons/obj/items/guns/inhands/pistol_righthand.dmi'
