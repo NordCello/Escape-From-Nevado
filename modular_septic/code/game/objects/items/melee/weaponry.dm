@@ -255,62 +255,6 @@
 			current_atk_mode = SLASH_MODE
 			sharpness = SHARP_EDGED
 
-/obj/item/kukri
-	name = "Kukri"
-	desc = "A carbon-steel kukri, usually found in the hands of people who really want to make cartel videos."
-	icon_state = "cockri"
-	inhand_icon_state = "cockri"
-	worn_icon_state = "cockri"
-	icon = 'modular_septic/icons/obj/items/melee/knife.dmi'
-	lefthand_file = 'modular_septic/icons/obj/items/melee/inhands/knife_lefthand.dmi'
-	righthand_file = 'modular_septic/icons/obj/items/melee/inhands/knife_righthand.dmi'
-	worn_icon = 'modular_septic/icons/obj/items/melee/worn/knife_worn.dmi'
-	hitsound = list('modular_septic/sound/weapons/melee/kukri1.wav', 'modular_septic/sound/weapons/melee/kukri2.wav', 'modular_septic/sound/weapons/melee/kukri3.wav')
-	equip_sound = 'modular_septic/sound/weapons/melee/kukri_holster.wav'
-	pickup_sound = 'modular_septic/sound/weapons/melee/kukri_deploy.wav'
-	miss_sound = list('modular_septic/sound/weapons/melee/kukri_swish1.wav', 'modular_septic/sound/weapons/melee/kukri_swish2.wav', 'modular_septic/sound/weapons/melee/kukri_swish3.wav')
-	drop_sound = list('modular_septic/sound/weapons/melee/bladedrop1.wav', 'modular_septic/sound/weapons/melee/bladedrop2.wav')
-	min_force = 6
-	force = 10
-	min_force_strength = 1
-	force_strength = 1.8
-	wound_bonus = 5
-	bare_wound_bonus = 1
-	flags_1 = CONDUCT_1
-	w_class = WEIGHT_CLASS_NORMAL
-	slot_flags = ITEM_SLOT_BELT
-	sharpness = SHARP_EDGED
-	parrying_modifier = 1
-	skill_melee = SKILL_SHORTSWORD
-	tetris_width = 32
-	tetris_height = 96
-
-/obj/item/skin_cleaver
-	name = "Skin Deep Cleaver"
-	desc = "A Skin Deep Cleaver, known for It's tiny size and precision, definitely not being essentially a sharp club."
-	icon_state = "skin_cleaver"
-	inhand_icon_state = "skin_cleaver"
-	slot_flags = null
-	hitsound = list('modular_septic/sound/weapons/melee/heavysharp_slash1.ogg', 'modular_septic/sound/weapons/melee/heavysharp_slash2.ogg', 'modular_septic/sound/weapons/melee/heavysharp_slash3.ogg')
-	pickup_sound = 'modular_septic/sound/weapons/melee/heavysharp_deploy.ogg'
-	miss_sound = list('modular_septic/sound/weapons/melee/heavysharp_swish1.ogg', 'modular_septic/sound/weapons/melee/heavysharp_swish2.ogg', 'modular_septic/sound/weapons/melee/heavysharp_swish3.ogg')
-	drop_sound = list('modular_septic/sound/weapons/melee/bladedrop1.wav', 'modular_septic/sound/weapons/melee/bladedrop2.wav')
-	icon = 'modular_septic/icons/obj/items/melee/48x32.dmi'
-	lefthand_file = 'modular_septic/icons/obj/items/melee/inhands/sword_lefthand.dmi'
-	righthand_file = 'modular_septic/icons/obj/items/melee/inhands/sword_righthand.dmi'
-	min_force = 13
-	force = 25
-	min_force_strength = 1.3
-	force_strength = 2.5
-	wound_bonus = 10
-	bare_wound_bonus = 1
-	w_class = WEIGHT_CLASS_BULKY
-	sharpness = SHARP_EDGED
-	parrying_modifier = 1
-	skill_melee = SKILL_SHORTSWORD
-	tetris_width = 32
-	tetris_height = 96
-
 /obj/item/melee/sabre
 	parrying_modifier = 1
 	skill_melee = SKILL_RAPIER
