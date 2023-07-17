@@ -19,7 +19,7 @@
 
 /obj/projectile/bullet/gas40mm
 	name ="40mm gassy grenade"
-	desc = "OH MY GOODNESS GRACIOUS"
+	desc = "This warehouse needs a hero!"
 	icon = 'modular_septic/icons/obj/items/guns/projectiles/projectiles.dmi'
 	icon_state= "bolter"
 	damage = 30
