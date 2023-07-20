@@ -5,9 +5,9 @@
 			It eminates a hostile and down right racist aurora... \
 			Moderate protection against most types of damage. Does not cover the face."
     icon = 'modular_septic/icons/obj/clothing/hats.dmi'
-    icon_state = "m56-cover"
+    icon_state = "m56"
     worn_icon = 'modular_septic/icons/mob/clothing/head.dmi'
-    worn_icon_state = "m56-cover"
+    worn_icon_state = "m56"
     max_integrity = 150
     limb_integrity = 150
     integrity_failure = 0.1
