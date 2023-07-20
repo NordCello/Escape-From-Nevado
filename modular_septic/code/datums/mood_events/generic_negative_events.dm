@@ -66,12 +66,12 @@
 //WORST smell
 /datum/mood_event/incredible_gas
 	description = span_infection("Smells like someone ripped ass!")
-	mood_change = -4
+	mood_change = -6
 	timeout = 1 MINUTES
 
 /datum/mood_event/incredible_gas/harsh
 	description = span_infection("Smells like rotten eggs and garbage!")
-	mood_change = -8
+	mood_change = -12
 
 //Ate shit
 /datum/mood_event/creampie/shitface
