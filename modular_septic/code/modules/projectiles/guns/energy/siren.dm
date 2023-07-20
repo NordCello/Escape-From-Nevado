@@ -17,7 +17,7 @@
 	drop_sound = 'modular_septic/sound/weapons/guns/drop_heavygun.wav'
 	vary_fire_sound = FALSE
 	cell_type = /obj/item/stock_parts/cell/high
-	charge_delay = 5
+	charge_delay = 15
 	ammo_type = list(/obj/item/ammo_casing/energy/siren)
 	custom_materials = list(/datum/material/uranium=10000, \
 						/datum/material/titanium=25000, \
