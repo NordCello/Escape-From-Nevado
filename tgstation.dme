@@ -5196,6 +5196,7 @@
 #include "modular_septic\code\modules\reagents\reagent_containers\medigel.dm"
 #include "modular_septic\code\modules\reagents\reagent_containers\patch.dm"
 #include "modular_septic\code\modules\reagents\reagent_containers\pill.dm"
+#include "modular_septic\code\modules\reagents\reagent_containers\solocup.dm"
 #include "modular_septic\code\modules\reagents\reagent_containers\syringe.dm"
 #include "modular_septic\code\modules\reagents\withdrawal\generic_addictions.dm"
 #include "modular_septic\code\modules\research\techweb\all_nodes.dm"
