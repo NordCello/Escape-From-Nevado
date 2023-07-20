@@ -209,7 +209,7 @@
 		/obj/item/clothing/head/helmet/m56 = 1,
 	)
 	inputs = list(
-		/obj/item/organ/bone/head = 4,
+		/obj/item/organ/bone/head = 1,
 	)
 
 /datum/bartering_recipe/idobe

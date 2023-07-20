@@ -18,10 +18,10 @@
 		/obj/item/clothing/mask/breath/medical/n95 = 40,
 		/obj/item/wrench = 40,
 	)
-	var/list/tiktoklines = list('modular_septic/sound/effects/singer1.wav', 'modular_septic/sound/effects/singer2.wav')
 	var/refuse_sound_cooldown_duration = 1 SECONDS
 	var/barfsound = 'modular_septic/sound/emotes/vomit.wav'
-	var/crushersound = list('modular_septic/sound/effects/crusher1.wav', 'modular_septic/sound/effects/crusher2.wav', 'modular_septic/sound/effects/crusher3.wav')
+	var/list/crushersounds = list('modular_septic/sound/effects/crusher1.wav', 'modular_septic/sound/effects/crusher2.wav', 'modular_septic/sound/effects/crusher3.wav')
+	var/list/tiktok_sounds = list('modular_septic/sound/effects/singer1.wav', 'modular_septic/sound/effects/singer2.wav')
 	COOLDOWN_DECLARE(refuse_cooldown)
 
 /obj/machinery/vending/tiktok/examine_more(mob/user)
@@ -37,13 +37,14 @@
 			input_strings += "[bartering_recipe.inputs[input]] [initial(totally_real_atom.name)]"
 		var/input_text = "Input: [jointext(input_strings, " + ")]"
 		var/list/output_strings = list()
-		for(var/output in bartering_recipe.inputs)
+		for(var/output in bartering_recipe.outputs)
 			var/atom/totally_real_atom = output
 			output_strings += "[bartering_recipe.outputs[output]] [initial(totally_real_atom.name)]"
 		var/output_text = "Output: [jointext(output_strings, " + ")]"
 		barter_strings += "[input_text] - [output_text]"
 	infobox += jointext(barter_strings, "\n")
 	infobox += "</div>"
+	. += infobox
 
 /obj/machinery/vending/tiktok/attackby(obj/item/I, mob/living/user, params)
 	var/list/modifiers = params2list(params)
@@ -56,7 +57,7 @@
 			return
 		if(user.transferItemToLoc(I, src))
 			sound_hint()
-			playsound(src, crushersound, 70, vary = FALSE)
+			playsound(src, pick(crushersounds), 70, vary = FALSE)
 			INVOKE_ASYNC(src, .proc/crushing_animation)
 			check_bartering()
 			return
@@ -82,7 +83,7 @@
 	if((last_slogan + slogan_delay <= world.time) && (LAZYLEN(slogan_list) > 0) && !shut_up && DT_PROB(2.5, delta_time))
 		var/slogan = pick(slogan_list)
 		flick("[base_icon_state]-speak", src)
-		playsound(src, tiktoklines, 70, vary = FALSE)
+		playsound(src, tiktok_sounds, 70, vary = FALSE)
 		speak(slogan)
 		last_slogan = world.time
 
