@@ -69,7 +69,7 @@
 // The legendary
 /obj/item/gun/ballistic/shotgun/doublebarrel/bobox
 	name = "Bobox shotgun"
-	desc = "A legendary shotgun with a simple combination of two barrels, not ideal, but a powerful weapon in the filthiest, unskilled hands."
+	desc = "A legendary shotgun with a simple combination of two barrels - Not ideal, but a powerful weapon in the filthiest, unskilled hands."
 	icon = 'modular_septic/icons/obj/items/guns/shotgun.dmi'
 	inhand_icon_state = "bobox"
 	base_icon_state = "bobox"
@@ -98,6 +98,7 @@
 // ITHACA SHOTGUN
 /obj/item/gun/ballistic/shotgun/ithaca
 	name = "\improper ITOBE modelo 37 shotgun"
+	desc = "A simple, reliable pump action shotgun."
 	icon = 'modular_septic/icons/obj/items/guns/40x32.dmi'
 	icon_state = "ithaca"
 	base_icon_state = "ithaca"
@@ -299,7 +300,7 @@
 		"recoil_angle_lower" = -30, \
 	)
 	pin = /obj/item/firing_pin
-	mag_type = /obj/item/ammo_box/magazine/abyss_shotgun_drum
+	mag_type = /obj/item/ammo_box/magazine/abyss12g
 	suppressor_x_offset = 8
 
 // BALLS DESTROYER

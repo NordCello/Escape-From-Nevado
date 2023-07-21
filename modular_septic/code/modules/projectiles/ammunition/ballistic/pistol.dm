@@ -1,6 +1,6 @@
 /obj/item/ammo_casing/c22lr
 	name = ".22lr bullet casing"
-	desc = "A 22 long rifle bullet casing."
+	desc = "A 22 long rifle bullet casing. God's chosen caliber."
 	icon_state = "c22lr"
 	base_icon_state = "c22lr"
 	caliber = CALIBER_22LR

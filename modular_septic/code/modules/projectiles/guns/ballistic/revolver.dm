@@ -122,7 +122,7 @@
 
 // Poppy
 /obj/item/gun/ballistic/revolver/remis/poppy
-	name = "\improper .500 Poppy Revolver"
+	name = "\improper Poppy .500 Revolver"
 	desc = "A revolver used in a notorius game of random deathmatch."
 	icon_state = "500"
 	base_icon_state = "500"

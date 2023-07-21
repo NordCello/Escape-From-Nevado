@@ -39,8 +39,7 @@
 		/obj/item/ammo_box/magazine/thump45 = 2,
 	)
 	inputs = list(
-		/obj/item/gun/ballistic/automatic/remis/smg/solitario = 1,
-		/obj/item/gun/ballistic/automatic/remis/smg/solitario/suppressed = 1,
+		/obj/item/gun/ballistic/automatic/remis/smg/solitario = 2,
 	)
 
 /datum/bartering_recipe/winter
@@ -61,7 +60,7 @@
 		/obj/item/ammo_casing/batteries/bigvolt = 1,
 	)
 
-/datum/bartering_recipe/ithaca
+/datum/bartering_recipe/shotgun
 	outputs = list(
 		/obj/item/gun/ballistic/shotgun/ithaca = 1,
 		/obj/item/storage/box/c12buckshot = 1,
@@ -70,13 +69,22 @@
 		/obj/item/toothbrush = 1,
 	)
 
-/datum/bartering_recipe/shotgun
+/datum/bartering_recipe/shotgun/combat
 	outputs = list(
 		/obj/item/gun/ballistic/shotgun/automatic/combat = 1,
 		/obj/item/storage/box/c12buckshot = 1,
 	)
 	inputs = list(
 		/obj/item/circuitboard = 1,
+	)
+
+/datum/bartering_recipe/shotgun/massacre
+	outputs = list(
+		/obj/item/gun/ballistic/shotgun/bulldog = 1,
+		/obj/item/ammo_box/magazine/m12g = 2,
+	)
+	inputs = list(
+		/obj/item/reagent_containers/food/drinks/soda_cans/mug = 3,
 	)
 
 /datum/bartering_recipe/abyss
@@ -131,7 +139,7 @@
 		/obj/item/gun/energy/remis/nasr = 1,
 	)
 	inputs = list(
-		/obj/item/organ/heart = 2,
+		/obj/item/organ/heart = 3,
 	)
 
 /datum/bartering_recipe/bolas
@@ -149,7 +157,7 @@
 		/obj/item/ammo_box/magazine/aniquilador = 2,
 	)
 	inputs = list(
-		/obj/item/organ/kidneys = 2,
+		/obj/item/organ/kidneys = 4,
 	)
 
 /datum/bartering_recipe/siren

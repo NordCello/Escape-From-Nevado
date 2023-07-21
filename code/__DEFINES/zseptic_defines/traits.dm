@@ -71,6 +71,8 @@
 #define TRAIT_HEROIN_JUNKIE "heroin_junkie"
 /// Immune to faucinil overdose and vomit
 #define TRAIT_FAUCIPILLED "faucipilled"
+/// Immune to overdoses in general
+#define TRAIT_OVERDOSE_IMMUNE "overdose_immune"
 
 // ~BODYPART TRAITS
 /// Rotten beyond salvation

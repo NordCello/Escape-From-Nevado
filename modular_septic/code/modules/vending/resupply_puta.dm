@@ -311,6 +311,8 @@
 			liquid_option = /datum/reagent/medicine/whiteviscous
 		if("Faucinil") //disease curer
 			liquid_option = /datum/reagent/medicine/faucinil
+		if("Narcan") //overdose curer
+			liquid_option = /datum/reagent/medicine/narcan
 	if(!liquid_option)
 		to_chat(user, span_warning("Nevermind."))
 	else

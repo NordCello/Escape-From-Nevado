@@ -1,3 +1,4 @@
+//god's chosen caliber
 /obj/projectile/bullet/c22lr
 	name = ".22lr bullet"
 	damage = 20

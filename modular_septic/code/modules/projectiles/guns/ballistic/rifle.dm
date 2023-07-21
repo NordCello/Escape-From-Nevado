@@ -119,7 +119,8 @@
 	w_class = WEIGHT_CLASS_BULKY
 	full_auto = TRUE
 	foldable = TRUE
-	folded = FALSE
+	folded = TRUE
+
 //donator gun
 /obj/item/gun/ballistic/automatic/remis/abyss/donator
 	name = "\improper AN-95 5.4539mm Abyss Armaments Paypig Assault Rifle"
@@ -262,7 +263,7 @@
 	var/monologue = "FIX ME!"
 	switch(sounding)
 		if('modular_septic/sound/weapons/guns/rifle/voice_steyr/cyberpunk.wav')
-			monologue = "Cyberpunk is just a soyjack interpretation of the real world."
+			monologue = "Cyberpunk is just a soyjak interpretation of the real world."
 		if('modular_septic/sound/weapons/guns/rifle/voice_steyr/consequences.wav')
 			monologue = "Now you know the consequences of your actions."
 		if('modular_septic/sound/weapons/guns/rifle/voice_steyr/thefeds.wav')
@@ -270,7 +271,6 @@
 	if(monologue)
 		say(monologue)
 	INVOKE_ASYNC(src, .proc/we_do_a_little_shaking)
-
 
 /obj/item/gun/ballistic/automatic/remis/steyr/proc/aimed_sounding(datum/component/gunpoint/gunpoint, sounding)
 	var/voice_line = "FUCK!"
@@ -373,7 +373,7 @@
 	tetris_height = 128
 
 /obj/item/gun/ballistic/rifle/boltaction/remis/federson
-	name = "\improper Federson \"Osaco Chuckster\" bolt-action rifle"
+	name = "\improper Federson Osaco Chuckster bolt-action rifle"
 	desc = "A bolt-action rifle capable of piercing through armor, and making accurate shots even at a range. It's cursed by having It's own cartridge unfortunately, .276 Federson."
 	icon_state = "pedersen"
 	base_icon_state = "pedersen"

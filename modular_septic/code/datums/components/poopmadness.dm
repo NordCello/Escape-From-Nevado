@@ -156,7 +156,7 @@
 	if(viscous_amount < 50)
 		madman.reagents.add_reagent(/datum/reagent/medicine/whiteviscous, viscous_amount-50)
 	if(madman.blood_volume < BLOOD_VOLUME_NORMAL)
-		madman.blood_volume += 3 * delta_time
+		madman.adjust_bloodvolume(3)
 	madman.heal_bodypart_damage(2 * delta_time, 2 * delta_time, 2 * delta_time)
 	madman.hallucination += 0.5 * delta_time
 	if(DT_PROB(2, delta_time))

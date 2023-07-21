@@ -18,15 +18,15 @@
 /datum/reagent/toxin/piranha_solution/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
 	. = ..()
 	if(methods & TOUCH)
-		exposed_mob.take_bodypart_damage(0, reac_volume)
+		exposed_mob.take_bodypart_damage(burn = reac_volume)
 
 /datum/reagent/toxin/piranha_solution/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	. = ..()
-	M.take_bodypart_damage(0, 2.5 * delta_time)
+	M.take_bodypart_damage(burn = 5 * REM* delta_time)
 
 /datum/reagent/toxin/piranha_solution/on_mob_dead(mob/living/carbon/C, delta_time)
 	. = ..()
-	C.take_bodypart_damage(0, 2.5 * delta_time)
+	C.take_bodypart_damage(burn = 5 * REM * delta_time)
 
 //armor oil real
 /datum/reagent/toxin/armor_oil
@@ -48,9 +48,8 @@
 	if(istype(exposed_obj, /obj/item/stack/medical/suture) && !istype(exposed_obj, /obj/item/stack/medical/suture/ballistic))
 		var/obj/item/stack/medical/suture/not_black_tar = exposed_obj
 		var/amount = min(not_black_tar.amount, FLOOR(reac_volume/10, 1))
-		if(amount >= 1)
+		if((amount >= 1) && not_black_tar.use(amount))
 			new /obj/item/stack/medical/suture/ballistic(not_black_tar.loc, amount)
-			not_black_tar.use(amount)
 
 /datum/reagent/toxin/armor_oil/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	. = ..()
