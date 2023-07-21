@@ -21,38 +21,39 @@
 	var/max_medical_items = 5
 	var/spendilizer_state = SPENDILIZER_EXTENDED
 	var/state_flags = RESUPPLY_READY
-	var/list/dispensible_stacks = list(/obj/item/ammo_box/magazine/ammo_stack/shotgun/bolas/loaded,
-									/obj/item/ammo_box/magazine/ammo_stack/shotgun/bolas/slugs/loaded,
-									/obj/item/ammo_box/magazine/ammo_stack/shotgun/loaded,
-									/obj/item/ammo_box/magazine/ammo_stack/shotgun/slugs/loaded,
-									/obj/item/ammo_box/magazine/ammo_stack/a276/loaded,
-									/obj/item/ammo_box/magazine/ammo_stack/c38/loaded,
-									/obj/item/ammo_box/magazine/ammo_stack/c38/pluspee/loaded,
-									/obj/item/ammo_box/magazine/ammo_stack/a357/loaded,
-									/obj/item/ammo_box/magazine/ammo_stack/a500/loaded)
-	var/list/dispensible_medical = list(/obj/item/scalpel,
-										/obj/item/stack/medical/ointment,
-										/obj/item/stack/medical/gauze,
-										/obj/item/stack/medical/suture/medicated,
-										/obj/item/reagent_containers/syringe/minoxidil,
-										/obj/item/reagent_containers/syringe/epinephrine,
-										/obj/item/reagent_containers/syringe/atropine,
-										/obj/item/reagent_containers/syringe/antiviral,
-										/obj/item/reagent_containers/syringe/multiver,
-										/obj/item/reagent_containers/pill/potassiodide)
-	var/list/stack_type_to_name = list()
-	var/list/medical_stack_type_to_name = list()
+	var/list/dispensible_stacks = list(
+		/obj/item/ammo_box/magazine/ammo_stack/shotgun/bolas/loaded,
+		/obj/item/ammo_box/magazine/ammo_stack/shotgun/bolas/slugs/loaded,
+		/obj/item/ammo_box/magazine/ammo_stack/shotgun/loaded,
+		/obj/item/ammo_box/magazine/ammo_stack/shotgun/slugs/loaded,
+		/obj/item/ammo_box/magazine/ammo_stack/a276/loaded,
+		/obj/item/ammo_box/magazine/ammo_stack/c38/loaded,
+		/obj/item/ammo_box/magazine/ammo_stack/a357/loaded,
+		/obj/item/ammo_box/magazine/ammo_stack/a500/loaded,
+	)
+	var/list/dispensible_medical = list(
+		/obj/item/scalpel,
+		/obj/item/stack/medical/ointment,
+		/obj/item/stack/medical/gauze,
+		/obj/item/stack/medical/suture/medicated,
+		/obj/item/reagent_containers/syringe/minoxidil,
+		/obj/item/reagent_containers/syringe/epinephrine,
+		/obj/item/reagent_containers/syringe/atropine,
+		/obj/item/reagent_containers/syringe/antiviral,
+		/obj/item/reagent_containers/syringe/multiver,
+		/obj/item/reagent_containers/pill/potassiodide,
+	)
+	var/list/stack_type_to_name = list() //filed on init
+	var/list/medical_stack_type_to_name = list() //filed on init
 	var/obj/item/reagent_containers/hypospray/medipen/retractible/blacktar/captagon
-	var/obj/item/gun/ballistic/revolver/remis/nova/pluspee/nova = /obj/item/gun/ballistic/revolver/remis/nova
+	var/shiny_gift = /obj/item/gun/ballistic/revolver/remis/gado
 
 /obj/machinery/resupply_puta/Initialize(mapload)
 	. = ..()
 	STOP_PROCESSING(SSobj, src)
 	START_PROCESSING(SSkillbitches, src)
-	if(prob(50))
-		nova = new nova(src)
-	else
-		nova = null
+	if(shiny_gift)
+		shiny_gift = new shiny_gift(src)
 	name = "\proper [random_adjective()] ([rand(0,9)][rand(0,9)]) [initial(name)]"
 	become_hearing_sensitive(trait_source = INNATE_TRAIT)
 
@@ -192,14 +193,13 @@
 
 /obj/machinery/resupply_puta/attack_hand_tertiary(mob/living/user, list/modifiers)
 	. = ..()
-	if(!nova)
+	if(!shiny_gift)
 		to_chat(user, span_warning("There's no bright shiny gift for me today."))
-		return
 	else
 		to_chat(user, span_green("There was a bright shiny gift!"))
-		user.transferItemToLoc(nova, user.loc)
-		user.put_in_hands(nova)
-		nova = null
+		user.transferItemToLoc(shiny_gift, user.loc)
+		user.put_in_hands(shiny_gift)
+		shiny_gift = null
 
 /obj/machinery/resupply_puta/attackby(obj/item/weapon, mob/user, params)
 	if(!(state_flags & RESUPPLY_READY))

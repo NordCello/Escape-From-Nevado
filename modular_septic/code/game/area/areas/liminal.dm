@@ -181,6 +181,7 @@
 		//When a human enters the hallway, what happens?
 		ADD_TRAIT(living_arrived, TRAIT_PACIFISM, AREA_TRAIT)
 		ADD_TRAIT(living_arrived, TRAIT_HEROIN_JUNKIE, AREA_TRAIT)
+		ADD_TRAIT(living_arrived, TRAIT_FAUCIPILLED, AREA_TRAIT)
 
 /area/maintenance/liminal/intro/Exited(atom/movable/gone, direction, volume = 70)
 	. = ..()
@@ -189,3 +190,4 @@
 		//When a human exits the hallway, what happens?
 		REMOVE_TRAIT(living_gone, TRAIT_PACIFISM, AREA_TRAIT)
 		REMOVE_TRAIT(living_gone, TRAIT_HEROIN_JUNKIE, AREA_TRAIT)
+		REMOVE_TRAIT(living_gone, TRAIT_FAUCIPILLED, AREA_TRAIT)

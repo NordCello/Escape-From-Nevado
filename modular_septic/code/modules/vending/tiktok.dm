@@ -17,6 +17,7 @@
 		/obj/item/clothing/suit/armor/vest/alt/discrete = 40,
 		/obj/item/clothing/mask/breath/medical/n95 = 40,
 		/obj/item/wrench = 40,
+		/obj/item/gun/ballistic/revolver/remis/nova = 40,
 	)
 	var/refuse_sound_cooldown_duration = 1 SECONDS
 	var/barfsound = 'modular_septic/sound/emotes/vomit.wav'

@@ -14,6 +14,8 @@
 	var/minimum_time = 10
 	/// Worst case scenario time for this step
 	var/maximum_time = 20
+	/// Is this step acceptable for pacifists?
+	var/violent_step = FALSE
 	/// Is this step realized via middle click instead of normal click?
 	var/middle_click_step = FALSE
 	/// Can this step be repeated?
@@ -59,6 +61,8 @@
 /datum/surgery_step/proc/validate_user(mob/user)
 	. = TRUE
 	if(!(user.zone_selected in possible_locs))
+		. = FALSE
+	else if(violent_step && HAS_TRAIT(user, TRAIT_PACIFISM))
 		. = FALSE
 
 /datum/surgery_step/proc/validate_target(mob/living/target, mob/user)
