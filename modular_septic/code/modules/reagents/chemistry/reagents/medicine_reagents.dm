@@ -485,6 +485,9 @@
 	if(prob(1))
 		var/image_src = image2html('modular_septic/images/narcan.gif', L, format = "gif", sourceonly = TRUE)
 		to_chat(L, span_danger("<img src='[image_src]' width=128 height=96>"))
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		C.set_heartattack(FALSE)
 
 /datum/reagent/medicine/narcan/on_mob_end_metabolize(mob/living/L)
 	. = ..()
