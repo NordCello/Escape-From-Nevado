@@ -40,7 +40,7 @@
 
 /datum/bartering_recipe/lean
 	outputs = list(
-		/obj/item/reagent_containers/food/drinks/colocup/lean = 1,
+		/obj/item/reagent_containers/food/drinks/soda_cans/lean = 1,
 	)
 	inputs = list(
 		/obj/item/organ/liver = 1,

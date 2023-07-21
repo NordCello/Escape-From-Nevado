@@ -140,7 +140,7 @@
 	reagent_state = LIQUID
 	color = "#ff799679"
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
-	overdose_threshold = 30
+	overdose_threshold = OVERDOSE_STANDARD
 	ph = 6.5
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	taste_description = "euphoria"

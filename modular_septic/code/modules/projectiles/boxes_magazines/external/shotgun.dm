@@ -1,6 +1,6 @@
 // SAIGA 12
-/obj/item/ammo_box/magazine/abyss_shotgun_drum
-	name = "\improper Abyss Shotgun magazine"
+/obj/item/ammo_box/magazine/abyss12g
+	name = "\improper Abyss Shotgun drum magazine"
 	desc = "A 20-shell capacity magazine for the AN-12 shotgun."
 	icon = 'modular_septic/icons/obj/items/ammo/shotgun.dmi'
 	icon_state = "saiga_drum"
@@ -12,7 +12,7 @@
 	tetris_width = 64
 	tetris_height = 64
 
-/obj/item/ammo_box/magazine/abyss_shotgun_drum/update_icon_state()
+/obj/item/ammo_box/magazine/abyss12g/update_icon_state()
 	. = ..()
 	icon_state = "[base_icon_state]-[ammo_count() ? 20 : 0]"
 

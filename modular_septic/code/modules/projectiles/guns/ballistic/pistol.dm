@@ -3,7 +3,6 @@
 	fire_delay = 1
 	carry_weight = 1
 	carry_weight = 0.8
-	safety_off_sound = 'modular_septic/sound/weapons/guns/pistol/pistol_safety.wav'
 	safety_on_sound = 'modular_septic/sound/weapons/guns/pistol/pistol_safety.wav'
 	skill_melee = SKILL_IMPACT_WEAPON
 	skill_ranged = SKILL_PISTOL
@@ -233,7 +232,7 @@
 // WALTHER PPK
 /obj/item/gun/ballistic/automatic/pistol/remis/ppk
 	name = "\improper Bombeiro 22lr pistol"
-	desc = "The Walter Bomberio pistol is a reliable, easily concealable 22lr pistol. \
+	desc = "The Walter Bombeiro pistol is a reliable, easily concealable 22lr pistol. \
 			Doesn't pack too much of a punch, but was famously used by a british secret agent."
 	icon = 'modular_septic/icons/obj/items/guns/pistol.dmi'
 	icon_state = "ppk"
@@ -259,6 +258,7 @@
 	mag_type = /obj/item/ammo_box/magazine/ppk22lr
 	mag_display = TRUE
 	can_suppress = TRUE
+	weapon_weight = WEAPON_LIGHT
 	w_class = WEIGHT_CLASS_SMALL
 	carry_weight = 500 GRAMS
 	suppressor_x_offset = 8
