@@ -4,7 +4,7 @@
 	damage = 48
 	wound_bonus = 0
 	bare_wound_bonus = 0
-	wound_falloff_tile = -2
+	wound_falloff_tile = 0
 
 /obj/projectile/bullet/c38
 	name = ".38 suspicious bullet"
@@ -23,10 +23,10 @@
 	ricochet_chance = 20
 
 /obj/projectile/bullet/c38/pluspee
-	name = ".38 suspicious bullet"
-	damage = 34
-	wound_bonus = 2
-	bare_wound_bonus = 0
+	name = ".38 suspicious +P bullet"
+	damage = 36
+	wound_bonus = 4
+	bare_wound_bonus = 4
 	embedding = list("embed_chance"=40, \
 					"fall_chance"=0, \
 					"jostle_chance"=5, \
@@ -55,4 +55,4 @@
 	damage = 60
 	wound_bonus = 0
 	bare_wound_bonus = 0
-	wound_falloff_tile = -2
+	wound_falloff_tile = 0

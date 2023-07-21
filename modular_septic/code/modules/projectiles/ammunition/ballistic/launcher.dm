@@ -12,9 +12,9 @@
 	projectile_type = /obj/projectile/bullet/l40mm
 	stack_type = null
 
-/obj/item/ammo_casing/l40mm/poop
+/obj/item/ammo_casing/l40mm/gas
 	name = "40mm IG shell"
-	desc = "An incredibly gassy grenade."
+	desc = "An incredibly gassy grenade. It doesn't block your vision, but it smells so bad it makes you vomit."
 	world_icon_state = "40mmPOOP"
 	icon_state = "40mmPOOP"
 	base_icon_state = "40mmPOOP"
@@ -22,7 +22,7 @@
 
 /obj/item/ammo_casing/l40mm/smoke
 	name = "40mm SMK shell"
-	desc = "A cased grenade that deploys smoke in an area, can only be activated once fired out of a grenade launcher."
+	desc = "A cased grenade that deploys vision blocking smoke in an area, can only be activated once fired out of a grenade launcher."
 	world_icon_state = "40mmGAS"
 	icon_state = "40mmGAS"
 	base_icon_state = "40mmGAS"

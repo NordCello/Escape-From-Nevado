@@ -29,9 +29,9 @@
 	name = "random combat loot"
 	loot = list(
 		//SMGs
-		/obj/item/gun/ballistic/automatic/remis/smg/solitario = 2,
 		/obj/item/gun/ballistic/automatic/remis/smg/bastardo = 1,
 		/obj/item/gun/ballistic/automatic/remis/smg/thump = 1,
+		/obj/item/gun/ballistic/automatic/remis/smg/solitario = 2,
 		/obj/item/gun/ballistic/automatic/remis/smg/solitario/suppressed = 1,
 		//Rifles
 		/obj/item/gun/ballistic/automatic/remis/g11 = 1,
