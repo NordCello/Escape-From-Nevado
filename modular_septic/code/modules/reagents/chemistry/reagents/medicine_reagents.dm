@@ -370,8 +370,8 @@
 
 /datum/reagent/medicine/pinkturbid/on_mob_life(mob/living/carbon/M, delta_time, times_fired) // same thing as strange reagent
 	var/damage_at_random = rand(0, 250)/100 //0 to 2.5
-	M.take_bodypart_damage(brute = damage_at_random * REM * delta_time, FALSE)
-	M.take_bodypart_damage(burn = damage_at_random * REM * delta_time, FALSE)
+	M.take_bodypart_damage(brute = damage_at_random * REM * delta_time, updating_health = FALSE)
+	M.take_bodypart_damage(burn = damage_at_random * REM * delta_time, updating_health = TRUE)
 	..()
 	. = TRUE
 
