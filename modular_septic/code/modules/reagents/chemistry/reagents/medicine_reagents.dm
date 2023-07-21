@@ -98,7 +98,7 @@
 
 /datum/reagent/medicine/inaprovaline/overdose_start(mob/living/M)
 	. = ..()
-	M.add_chem_effect(CE_SPEED, -1, "[type]")
+	M.add_chem_effect(CE_SPEED, 10, "[type]")
 
 /datum/reagent/medicine/inaprovaline/overdose_process(mob/living/M, delta_time, times_fired)
 	. = ..()
@@ -184,10 +184,10 @@
 
 /datum/reagent/medicine/epinephrine/on_mob_end_metabolize(mob/living/carbon/M)
 	. = ..()
-	M.remove_chem_effect(CE_TOXIN, "[type]")
 	M.remove_chem_effect(CE_STIMULANT, "[type]")
 	M.remove_chem_effect(CE_PULSE, "[type]")
 	M.remove_chem_effect(CE_PAINKILLER, "[type]")
+	M.remove_chem_effect(CE_TOXIN, "[type]")
 
 /datum/reagent/medicine/epinephrine/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	if(holder.has_reagent(/datum/reagent/toxin/lexorin))
@@ -215,7 +215,7 @@
 /datum/reagent/medicine/epinephrine/overdose_start(mob/living/M)
 	to_chat(M, span_userdanger("I am an ADRENALINE JUNKIE!"))
 	SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "[type]_overdose", /datum/mood_event/adrenaline_junkie)
-	M.add_chem_effect(CE_TOXIN, 2, "[type]")
+	M.add_chem_effect(CE_TOXIN, 10, "[type]")
 	M.increase_chem_effect(CE_PULSE, 1, "[type]")
 
 /datum/reagent/medicine/epinephrine/overdose_process(mob/living/M, delta_time, times_fired)
@@ -224,8 +224,6 @@
 		M.adjustFatigueLoss(3, FALSE)
 		M.adjustToxLoss(1, FALSE)
 		M.losebreath++
-		..()
-		return TRUE
 	return ..()
 
 //Reduces pulse slightly
@@ -302,6 +300,109 @@
 		carbon_mob.immunity -= 75
 	M.remove_chem_effect(CE_ANTIBIOTIC, "[type]")
 
+//Black Tar Heroin
+/datum/reagent/medicine/blacktar
+	name = "Black Tar Heroin"
+	description = "The strongest painkiller. \
+				Highly addictive, easily overdoseable at 15u."
+	ph = 6.9
+	reagent_state = LIQUID
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	metabolization_rate = REAGENTS_METABOLISM
+	overdose_threshold = OVERDOSE_STANDARD
+	color = "#820000"
+	overdose_threshold = 51
+
+/datum/reagent/medicine/blacktar/overdose_start(mob/living/M)
+	. = ..()
+	if(!iscarbon(M))
+		return
+	var/mob/living/carbon/C = M
+	if(HAS_TRAIT(M, TRAIT_HEROIN_JUNKIE))
+		M.reagents.remove_all_type(src.type)
+	else
+		C.set_heartattack(TRUE)
+		C.HeadRape(4 SECONDS)
+
+/datum/reagent/medicine/blacktar/on_mob_metabolize(mob/living/L)
+	. = ..()
+	L.playsound_local(L, 'modular_septic/sound/insanity/painhuff_start.wav', 100)
+	to_chat(L, span_achievementneutral("My skin feels numb and I can't feel pain anymore."))
+	L.add_chem_effect(CE_PAINKILLER, 200, "[type]")
+	L.add_chem_effect(CE_PULSE, 1, "[type]")
+
+/datum/reagent/medicine/blacktar/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	L.playsound_local(L, 'modular_septic/sound/insanity/painhuff_end.wav', 100)
+	to_chat(L, span_achievementneutral("My skin doesn't feel numb anymore."))
+	L.remove_chem_effect(CE_PAINKILLER, "[type]")
+	L.remove_chem_effect(CE_PULSE, "[type]")
+	if(iscarbon(L) && !HAS_TRAIT(L, TRAIT_HEROIN_JUNKIE))
+		var/mob/living/carbon/C = L
+		if(C.diceroll(GET_MOB_ATTRIBUTE_VALUE(C, STAT_ENDURANCE)) <= DICE_FAILURE)
+			C.vomit(20, TRUE, TRUE)
+
+//Pink Turbid
+/datum/reagent/medicine/pinkturbid
+	name = "Pink Turbid"
+	description = "A pink, unpleasent smelling liquid"
+	ph = 6.9
+	reagent_state = LIQUID
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	metabolization_rate = REAGENTS_METABOLISM * 3
+	overdose_threshold = OVERDOSE_STANDARD
+	self_consuming = TRUE //Does not get processed by the liver
+	color = "#FF69B4"
+	overdose_threshold = 51
+
+/datum/reagent/medicine/pinkturbid/expose_mob(mob/living/carbon/exposed_mob, methods=INJECT, reac_volume)
+	if(exposed_mob.stat != DEAD && exposed_mob.pulse > 0)
+		return ..()
+	if(exposed_mob.suiciding)
+		return
+	var/amount_to_revive = round((exposed_mob.getBruteLoss()+exposed_mob.getFireLoss())/20)
+	var/excess_healing = 5 * (reac_volume-amount_to_revive) //excess turbid will heal blood and organs across the board, carryover from strange reagent
+	exposed_mob.visible_message(span_warning("[exposed_mob] <b>shakes!</b>"))
+	playsound(exposed_mob, 'modular_septic/sound/effects/revival.ogg', 45, FALSE)
+	exposed_mob.do_jitter_animation(10)
+	exposed_mob.cure_all_traumas(TRAUMA_RESILIENCE_ABSOLUTE)
+	addtimer(CALLBACK(exposed_mob, /mob/living.proc/revive, FALSE, FALSE, excess_healing), 79)
+
+/datum/reagent/medicine/pinkturbid/on_mob_life(mob/living/carbon/M, delta_time, times_fired) // same thing as strange reagent
+	var/damage_at_random = rand(0, 250)/100 //0 to 2.5
+	M.take_bodypart_damage(brute = damage_at_random * REM * delta_time, FALSE)
+	M.take_bodypart_damage(burn = damage_at_random * REM * delta_time, FALSE)
+	..()
+	. = TRUE
+
+/datum/reagent/medicine/pinkturbid/overdose_start(mob/living/M)
+	. = ..()
+	if(!iscarbon(M))
+		return
+	var/mob/living/carbon/C = M
+	C.HeadRape(4 SECONDS)
+	addtimer(CALLBACK(C, /mob/living.proc/Stun, 10, TRUE, TRUE), 4 SECONDS)
+
+//White viscous
+/datum/reagent/medicine/whiteviscous
+	name = "White Viscous"
+	description = "Extremely powerful nootropic agent."
+	ph = 6.9
+	reagent_state = GAS
+	metabolization_rate = REAGENTS_METABOLISM * 3 //very fast metabolism
+	color = "#FBFBFD"
+	overdose_threshold = 51
+
+/datum/reagent/medicine/whiteviscous/on_mob_life(mob/living/carbon/owner, delta_time, times_fired)
+	owner.adjustOrganLoss(ORGAN_SLOT_BRAIN, -6 * REM * delta_time * normalise_creation_purity())
+	owner.jitteriness = 0
+	if(DT_PROB(5, delta_time))
+		owner.cure_all_traumas(TRAUMA_RESILIENCE_LOBOTOMY)
+		if(owner.has_dna())
+			owner.dna.remove_all_mutations(list(MUT_NORMAL, MUT_EXTRA), TRUE)
+
+	return ..()
+
 //Antiviral
 /datum/reagent/medicine/faucinil
 	name = "Faucinil"
@@ -313,7 +414,7 @@
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	metabolization_rate = REAGENTS_METABOLISM * 3 //very fast metabolism
 	overdose_threshold = 51
-	ph = 8
+	ph = 8.9
 	self_consuming = TRUE //Does not get processed by the liver
 	/// Current lyrics index
 	var/current_lyric = 1
@@ -364,111 +465,32 @@
 				var/mob/living/carbon/dr_fauci = M
 				dr_fauci.set_heartattack(TRUE)
 
-//Black Tar Heroin
-/datum/reagent/medicine/blacktar
-	name = "Black Tar Heroin"
-	description = "The strongest painkiller. \
-				Highly addictive, easily overdoseable at 15u."
-	ph = 6.9
-	reagent_state = LIQUID
-	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
-	metabolization_rate = REAGENTS_METABOLISM
-	overdose_threshold = OVERDOSE_STANDARD
-	self_consuming = TRUE //Does not get processed by the liver
-	color = "#820000"
-	overdose_threshold = 51
-
-/datum/reagent/medicine/blacktar/overdose_start(mob/living/M)
-	. = ..()
-	if(!iscarbon(M))
-		return
-	var/mob/living/carbon/C = M
-	if(HAS_TRAIT(M, TRAIT_HEROIN_JUNKIE))
-		M.reagents.remove_all_type(src.type)
-	else
-		C.set_heartattack(TRUE)
-		C.HeadRape(4 SECONDS)
-
-/datum/reagent/medicine/blacktar/on_mob_metabolize(mob/living/L)
-	. = ..()
-	L.playsound_local(L, 'modular_septic/sound/insanity/painhuff_start.wav', 100)
-	to_chat(L, span_achievementneutral("My skin feels numb and I can't feel pain anymore."))
-	L.heal_overall_damage(brute = 6 * REM)
-	L.add_chem_effect(CE_PAINKILLER, 200, "[type]")
-	L.add_chem_effect(CE_PULSE, 1, "[type]")
-
-/datum/reagent/medicine/blacktar/on_mob_end_metabolize(mob/living/L)
-	. = ..()
-	L.playsound_local(L, 'modular_septic/sound/insanity/painhuff_end.wav', 100)
-	to_chat(L, span_achievementneutral("My skin doesn't feel numb anymore."))
-	L.remove_chem_effect(CE_PAINKILLER, "[type]")
-	L.remove_chem_effect(CE_PULSE, "[type]")
-	if(iscarbon(L) && !HAS_TRAIT(L, TRAIT_HEROIN_JUNKIE))
-		var/mob/living/carbon/C = L
-		if(C.diceroll(GET_MOB_ATTRIBUTE_VALUE(C, STAT_ENDURANCE)) <= DICE_FAILURE)
-			C.vomit(20, TRUE, TRUE)
-
-//Pink Turbid
-/datum/reagent/medicine/pinkturbid
-	name = "Pink Turbid"
-	description = "A pink, unpleasent smelling liquid"
-	ph = 6.9
-	reagent_state = LIQUID
-	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
-	metabolization_rate = REAGENTS_METABOLISM
-	overdose_threshold = OVERDOSE_STANDARD
-	self_consuming = TRUE //Does not get processed by the liver
-	color = "#FF69B4"
-	overdose_threshold = 51
-
-/datum/reagent/medicine/pinkturbid/expose_mob(mob/living/carbon/exposed_mob, methods=INJECT, reac_volume)
-	if(exposed_mob.stat != DEAD && exposed_mob.pulse > 0)
-		return ..()
-	if(exposed_mob.suiciding)
-		return
-	var/amount_to_revive = round((exposed_mob.getBruteLoss()+exposed_mob.getFireLoss())/20)
-	var/excess_healing = 5 * (reac_volume-amount_to_revive) //excess turbid will heal blood and organs across the board, carryover from strange reagent
-	exposed_mob.visible_message(span_warning("[exposed_mob] <b>shakes!</b>"))
-	playsound(exposed_mob, 'modular_septic/sound/effects/revival.ogg', 45, FALSE)
-	exposed_mob.do_jitter_animation(10)
-	exposed_mob.cure_all_traumas(TRAUMA_RESILIENCE_ABSOLUTE)
-	addtimer(CALLBACK(exposed_mob, /mob/living.proc/revive, FALSE, FALSE, excess_healing), 79)
-
-/datum/reagent/medicine/pinkturbid/on_mob_life(mob/living/carbon/M, delta_time, times_fired) // same thing as strange reagent
-	var/damage_at_random = rand(0, 250)/100 //0 to 2.5
-	M.adjustBruteLoss(damage_at_random * REM * delta_time, FALSE)
-	M.adjustFireLoss(damage_at_random * REM * delta_time, FALSE)
-	..()
-	. = TRUE
-
-/datum/reagent/medicine/pinkturbid/overdose_start(mob/living/M)
-	. = ..()
-	if(!iscarbon(M))
-		return
-	var/mob/living/carbon/C = M
-	C.HeadRape(4 SECONDS)
-	addtimer(CALLBACK(C, /mob/living.proc/Stun, 10, TRUE, TRUE), 4 SECONDS)
-
-//white viscous
-/datum/reagent/medicine/whiteviscous
-	name = "White Viscous"
-	description = "Extremely powerful nootropic agent."
-	ph = 6.9
+//Overdose treatment
+/datum/reagent/medicine/narcan
+	name = "Narcan"
+	description = "Naloxone, sold under the brand name Narcan, is a medication used to reverse or reduce the effects of opioids.\
+				It can be used to effectively counter overdoses of most chemicals."
+	color = "#ffffff8a"
 	reagent_state = GAS
-	metabolization_rate = REAGENTS_METABOLISM * 3 //very fast metabolism
-	self_consuming = TRUE //Does not get processed by the liver
-	color = "#FBFBFD"
-	overdose_threshold = 51
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	metabolization_rate = REAGENTS_METABOLISM * 2 //decently quick metabolism
+	overdose_threshold = 51 //does not really matter due to the nature of this chem lol
+	ph = 7
 
-/datum/reagent/medicine/whiteviscous/on_mob_life(mob/living/carbon/owner, delta_time, times_fired)
-	owner.adjustOrganLoss(ORGAN_SLOT_BRAIN, -6 * REM * delta_time * normalise_creation_purity())
-	owner.jitteriness = 0
-	if(DT_PROB(5, delta_time))
-		owner.cure_all_traumas(TRAUMA_RESILIENCE_LOBOTOMY)
-		if(owner.has_dna())
-			owner.dna.remove_all_mutations(list(MUT_NORMAL, MUT_EXTRA), TRUE)
+/datum/reagent/medicine/narcan/on_mob_metabolize(mob/living/L)
+	. = ..()
+	ADD_TRAIT(L, TRAIT_OVERDOSE_IMMUNE, "[type]")
+	L.blur_eyes(3)
+	L.playsound_local(L, 'modular_septic/sound/insanity/huff.ogg', 100)
+	if(prob(1))
+		var/image_src = image2html('modular_septic/images/narcan.gif', L, format = "gif", sourceonly = TRUE)
+		to_chat(L, span_danger("<img src='[image_src]' width=128 height=96>"))
 
-	return ..()
+/datum/reagent/medicine/narcan/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	REMOVE_TRAIT(L, TRAIT_OVERDOSE_IMMUNE, "[type]")
+	L.blur_eyes(3)
+	L.playsound_local(L, 'modular_septic/sound/insanity/exhale.ogg', 100)
 
 //Copium
 /datum/reagent/medicine/copium
@@ -478,9 +500,9 @@
 	ph = 6.9 // nice
 	reagent_state = GAS
 	metabolization_rate = REAGENTS_METABOLISM * 0.25 //slow metabolism
-	self_consuming = TRUE //Does not get processed by the liver
 	color = "#d364ff"
 	overdose_threshold = 15
+	self_consuming = TRUE //Does not get processed by the liver
 
 /datum/reagent/medicine/copium/overdose_start(mob/living/M)
 	. = ..()
@@ -496,7 +518,7 @@
 	to_chat(L, span_achievementneutral("My skin feels numb and I can't feel pain anymore."))
 	L.add_chem_effect(CE_PULSE, -2, "[type]")
 	L.add_chem_effect(CE_PAINKILLER, 200, "[type]")
-	L.heal_overall_damage(brute = 12 * REM, burn = 12 * REM)
+	L.heal_overall_damage(brute = 6 * REM, burn = 6 * REM)
 
 /datum/reagent/medicine/copium/on_mob_end_metabolize(mob/living/L)
 	. = ..()

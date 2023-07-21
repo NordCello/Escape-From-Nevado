@@ -2,7 +2,7 @@
 	name = "Coca Cola"
 	description = "A potion of organ failure."
 	color = "#100800" // rgb: 16, 8, 0
-	taste_description = "perfection"
+	taste_description = "slightly better then Pepsi"
 	glass_icon_state = "spacecola"
 	glass_name = "glass of Coke"
 	glass_desc = "A glass of Coca Cola."
@@ -24,8 +24,8 @@
 	color = "#100800" // rgb: 16, 8, 0
 	taste_description = "slightly worse then pepsi" //"futa cum", seriously?
 	glass_icon_state = "spacecola"
-	glass_name = "glass of Diet Penis Cola"
-	glass_desc = "A violated glass of Diet Penis Cola.\nMerely looking at this makes you feel things in your pants."
+	glass_name = "glass of Diet Pepsi Cola"
+	glass_desc = "A violated glass of Diet Pepsi Cola.\nMerely looking at this makes you feel things in your pants."
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
 /datum/reagent/consumable/mug
