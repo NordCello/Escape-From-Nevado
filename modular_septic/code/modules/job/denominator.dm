@@ -24,7 +24,7 @@
 	gloves = /obj/item/clothing/gloves/color/black
 	shoes = /obj/item/clothing/shoes/jackboots
 
-	suit_store = /obj/item/gun/ballistic/automatic/remis/smg/solitario/suppressed
+	suit_store = /obj/item/gun/ballistic/automatic/remis/smg/solitario
 	back = /obj/item/storage/backpack/satchel/itobe
 
 /datum/outfit/denominator/shotgunner

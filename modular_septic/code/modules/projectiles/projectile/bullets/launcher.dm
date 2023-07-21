@@ -4,9 +4,9 @@
 	icon = 'modular_septic/icons/obj/items/guns/projectiles/projectiles.dmi'
 	icon_state= "bolter"
 	damage = 60
+	range = 7
 	embedding = null
 	shrapnel_type = null
-	range = 7
 
 /obj/projectile/bullet/l40mm/examine(mob/user)
 	. = ..()
@@ -23,13 +23,13 @@
 	icon = 'modular_septic/icons/obj/items/guns/projectiles/projectiles.dmi'
 	icon_state= "bolter"
 	damage = 30
+	range = 7
 	embedding = null
 	shrapnel_type = null
-	range = 7
 
 /obj/projectile/bullet/gas40mm/on_hit(atom/target, blocked = FALSE)
 	. = ..()
-	playsound(src, 'modular_septic/sound/effects/gassy.ogg', 95, TRUE, 1)
+	playsound(src, 'modular_septic/sound/effects/gassy.ogg', vol = 95, vary = TRUE, extrarange = 7)
 	var/turf/gassyturf = get_turf(src)
 	if(istype(gassyturf))
 		gassyturf.pollute_turf(/datum/pollutant/incredible_gas, 1000)
@@ -37,13 +37,14 @@
 
 /obj/projectile/bullet/smoke40mm
 	name ="40mm smoke grenade"
-	desc = "MHM"
+	desc = "Cough cough."
 	icon = 'modular_septic/icons/obj/items/guns/projectiles/projectiles.dmi'
 	icon_state= "bolter"
 	damage = 30
+	damage_type = BURN
+	range = 7
 	embedding = null
 	shrapnel_type = null
-	range = 7
 
 /obj/projectile/bullet/smoke40mm/on_hit(atom/target, blocked = FALSE)
 	. = ..()
@@ -54,14 +55,15 @@
 	return BULLET_ACT_HIT
 
 /obj/projectile/bullet/inc40mm
-	name ="40mm incindiary grenade"
-	desc = "MHM"
+	name ="40mm incendiary grenade"
+	desc = "Spicy meatball!"
 	icon = 'modular_septic/icons/obj/items/guns/projectiles/projectiles.dmi'
 	icon_state= "bolter"
-	damage = 30
+	damage = 45
+	damage_type = BURN
+	range = 7
 	embedding = null
 	shrapnel_type = null
-	range = 7
 
 /obj/projectile/bullet/inc40mm/on_hit(atom/target, blocked = FALSE)
 	. = ..()
