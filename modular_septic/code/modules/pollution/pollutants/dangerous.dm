@@ -4,7 +4,7 @@
 	pollutant_flags = POLLUTANT_BREATHE_ACT
 
 /datum/pollutant/carbon_air_pollution/breathe_act(mob/living/carbon/victim, amount)
-	if(amount <= 10)
+	if(amount < 10)
 		return
 	victim.adjustToxLoss(1)
 	if(prob(amount))
@@ -20,7 +20,7 @@
 	filter_wear = 0.25
 
 /datum/pollutant/dust/breathe_act(mob/living/carbon/victim, amount)
-	if(amount <= 10)
+	if(amount < 10)
 		return
 	if(prob(amount))
 		victim.losebreath += 3
@@ -40,18 +40,18 @@
 /datum/pollutant/miasma/breathe_act(mob/living/carbon/victim, amount)
 	var/message
 	switch(amount)
-		if(0 to 10)
+		if(0 to 5)
 			message = span_warning("What is this smell?!")
 			if(prob(15))
 				victim.emote("gag")
 			if(prob(10))
 				victim.vomit(rand(5, 10), prob(amount))
-		if(10 to 30)
+		if(5 to 15)
 			message = span_warning("I'm gonna puke...")
 			SEND_SIGNAL(victim, COMSIG_ADD_MOOD_EVENT, "pollution", /datum/mood_event/miasma)
 			if(prob(25))
 				victim.vomit(rand(5, 10), prob(amount))
-		if(30 to INFINITY)
+		if(15 to INFINITY)
 			message = span_bolddanger("This stench is unbearable!")
 			SEND_SIGNAL(victim, COMSIG_ADD_MOOD_EVENT, "pollution", /datum/mood_event/miasma/harsh)
 			victim.adjustToxLoss(2.5)
@@ -74,14 +74,14 @@
 /datum/pollutant/incredible_gas/breathe_act(mob/living/carbon/victim, amount)
 	var/message
 	switch(amount)
-		if(0 to 10)
+		if(0 to 5)
 			message = span_warning("What is this smell?!")
 			SEND_SIGNAL(victim, COMSIG_ADD_MOOD_EVENT, "pollution", /datum/mood_event/incredible_gas)
 			victim.adjustOrganLoss(ORGAN_SLOT_LUNGS, 2)
 			victim.adjustToxLoss(2)
 			if(prob(50))
 				victim.vomit(10, blood = prob(amount), stun = FALSE, vomit_type = VOMIT_PURPLE, purge_ratio = 1)
-		if(10 to 30)
+		if(5 to 15)
 			message = span_warning("This is vile!")
 			SEND_SIGNAL(victim, COMSIG_ADD_MOOD_EVENT, "pollution", /datum/mood_event/incredible_gas/harsh)
 			victim.apply_status_effect(/datum/status_effect/incredible_gas)
@@ -89,7 +89,7 @@
 			victim.adjustToxLoss(4)
 			if(prob(50))
 				victim.vomit(20, blood = prob(amount*3), stun = TRUE, vomit_type = VOMIT_PURPLE, purge_ratio = 1)
-		if(30 to INFINITY)
+		if(15 to INFINITY)
 			message = span_bolddanger("This is INCREDIBLY disgusting!")
 			SEND_SIGNAL(victim, COMSIG_ADD_MOOD_EVENT, "pollution", /datum/mood_event/incredible_gas/harsh)
 			victim.apply_status_effect(/datum/status_effect/incredible_gas)

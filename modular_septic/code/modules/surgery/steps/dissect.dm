@@ -11,6 +11,7 @@
 	minimum_time = 20
 	maximum_time = 40
 	surgery_flags = 0 //fucking FRIENDS
+	violent_step = TRUE
 
 /datum/surgery_step/dissect/validate_target(mob/living/target, mob/user)
 	. = ..()
