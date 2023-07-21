@@ -15,13 +15,32 @@
 		/obj/item/food/canned/beef = 2,
 	)
 
-/datum/bartering_recipe/thump
+/datum/bartering_recipe/solitario
+	outputs = list(
+		/obj/item/gun/ballistic/automatic/remis/smg/solitario = 1,
+		/obj/item/ammo_box/magazine/hksmg22lr = 2,
+	)
+	inputs = list(
+		/obj/item/gun/ballistic/automatic/pistol/remis/ppk = 2,
+	)
+
+/datum/bartering_recipe/solitario/suppressed
+	outputs = list(
+		/obj/item/gun/ballistic/automatic/remis/smg/solitario = 1,
+		/obj/item/ammo_box/magazine/hksmg380 = 2,
+	)
+	inputs = list(
+		/obj/item/reagent_containers/food/drinks/bottle = 1,
+	)
+
+/datum/bartering_recipe/solitario/thump
 	outputs = list(
 		/obj/item/gun/ballistic/automatic/remis/smg/thump = 1,
 		/obj/item/ammo_box/magazine/thump45 = 2,
 	)
 	inputs = list(
-		/obj/item/gun/ballistic/automatic/pistol/remis/ppk = 2,
+		/obj/item/gun/ballistic/automatic/remis/smg/solitario = 1,
+		/obj/item/gun/ballistic/automatic/remis/smg/solitario/suppressed = 1,
 	)
 
 /datum/bartering_recipe/winter
@@ -79,15 +98,6 @@
 	)
 	inputs = list(
 		/obj/item/grenade/frag = 1,
-	)
-
-/datum/bartering_recipe/solitario
-	outputs = list(
-		/obj/item/gun/ballistic/automatic/remis/smg/solitario/suppressed = 1,
-		/obj/item/ammo_box/magazine/hksmg380 = 2,
-	)
-	inputs = list(
-		/obj/item/reagent_containers/food/drinks/bottle = 1,
 	)
 
 /datum/bartering_recipe/combatmaster
