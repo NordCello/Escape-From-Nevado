@@ -356,10 +356,13 @@
 			M.say(lyrics[current_lyric])
 			current_lyric++
 	//overdose when the lyrics are done, if you are not fauci's strongest soldier
-	else if(!HAS_TRAIT(M, TRAIT_FAUCIPILLED))
-		if(iscarbon(M))
-			var/mob/living/carbon/dr_fauci = M
-			dr_fauci.set_heartattack(TRUE)
+	else
+		if(HAS_TRAIT(M, TRAIT_FAUCIPILLED))
+			M.reagents.remove_all_type(src.type)
+		else
+			if(iscarbon(M))
+				var/mob/living/carbon/dr_fauci = M
+				dr_fauci.set_heartattack(TRUE)
 
 //Black Tar Heroin
 /datum/reagent/medicine/blacktar
@@ -380,11 +383,11 @@
 	if(!iscarbon(M))
 		return
 	var/mob/living/carbon/C = M
-	if(!HAS_TRAIT(M, TRAIT_HEROIN_JUNKIE))
+	if(HAS_TRAIT(M, TRAIT_HEROIN_JUNKIE))
+		M.reagents.remove_all_type(src.type)
+	else
 		C.set_heartattack(TRUE)
 		C.HeadRape(4 SECONDS)
-	else
-		M.reagents.remove_all_type(src.type)
 
 /datum/reagent/medicine/blacktar/on_mob_metabolize(mob/living/L)
 	. = ..()
