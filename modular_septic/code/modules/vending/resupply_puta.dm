@@ -297,6 +297,7 @@
 		"Pink Turbid",
 		"White Viscous",
 		"Faucinil",
+		"Narcan",
 	)
 	var/title = "Requires at-least one empty vial."
 	var/message = "The Platter"
