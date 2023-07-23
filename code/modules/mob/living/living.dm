@@ -428,7 +428,7 @@
 						span_notice("I point at <b>[A]</b>."))
 	//SEPTIC EDIT END
 	return TRUE
-
+/* SEPTIC EDIT REMOVAL
 /mob/living/verb/succumb(whispered as null)
 	set hidden = TRUE
 	if (!CAN_SUCCUMB(src))
@@ -440,7 +440,7 @@
 		to_chat(src, span_userdanger("You have given up life and succumbed to death."))
 	death()
 	updatehealth()
-
+*/
 /mob/living/incapacitated(ignore_restraints = FALSE, ignore_grab = FALSE, ignore_stasis = FALSE)
 	if(HAS_TRAIT(src, TRAIT_INCAPACITATED) || (!ignore_restraints && (HAS_TRAIT(src, TRAIT_RESTRAINED) || (!ignore_grab && pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE))) || (!ignore_stasis && IS_IN_STASIS(src)))
 		return TRUE
