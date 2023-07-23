@@ -46,7 +46,7 @@
 	if(owner.pulse <= PULSE_NONE)
 		ADD_TRAIT(owner, TRAIT_DEATHS_DOOR, ASYSTOLE_TRAIT)
 		return
-	if(heart_efficiency < failing_threshold)
+	else if(heart_efficiency < failing_threshold)
 		owner.set_heartattack(TRUE)
 		ADD_TRAIT(owner, TRAIT_DEATHS_DOOR, ASYSTOLE_TRAIT)
 		return
