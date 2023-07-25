@@ -12,7 +12,7 @@
 
 /obj/structure/lattice/atom_destruction(damage_flag)
 	. = ..()
-	playsound(src, 'modular_septic/sound/effects/lattice_grind.wav', 80, FALSE)
+	playsound(src, 'modular_septic/sound/effects/lattice_grind.ogg', 80, FALSE)
 
 /obj/structure/lattice/catwalk/efn_safezone
 	desc = "A catwalk for preventing the quick descent of creatures."

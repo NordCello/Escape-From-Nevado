@@ -31,7 +31,7 @@
 	lean_monster.attributes?.add_attribute_modifier(/datum/attribute_modifier/lean, TRUE)
 	to_chat(lean_monster, span_warning("I feel myself stronger, so nice!"))
 	SEND_SIGNAL(lean_monster, COMSIG_ADD_MOOD_EVENT, "forbidden_sizzup", /datum/mood_event/lean, lean_monster)
-	lean_monster.playsound_local(lean_monster, 'modular_septic/sound/insanity/leanlaugh.wav', 50)
+	lean_monster.playsound_local(lean_monster, 'modular_septic/sound/insanity/leanlaugh.ogg', 50)
 
 	if(!lean_monster.hud_used)
 		return
@@ -60,7 +60,7 @@
 		return
 
 	var/atom/movable/screen/plane_master/rendering_plate/filter_plate = lean_monster.hud_used.plane_masters["[RENDER_PLANE_GAME]"]
-	lean_monster.playsound_local(lean_monster, 'modular_septic/sound/insanity/leanend.wav', 50)
+	lean_monster.playsound_local(lean_monster, 'modular_septic/sound/insanity/leanend.ogg', 50)
 	lean_monster.flash_pain_mental(30)
 
 	filter_plate.remove_filter("lean_filter")
@@ -124,7 +124,7 @@
 	crack_addict.crack_addict()
 	crack_addict.add_chem_effect(CE_STIMULANT, 2, "[type]")
 	crack_addict.attributes?.add_attribute_modifier(/datum/attribute_modifier/crack_addict, TRUE)
-	crack_addict.playsound_local(crack_addict, 'modular_septic/sound/insanity/bass.wav', 100)
+	crack_addict.playsound_local(crack_addict, 'modular_septic/sound/insanity/bass.ogg', 100)
 	to_chat(crack_addict, span_achievementrare("My brain swells and my muscles become faster."))
 	crack_addict.flash_pain_endorphine()
 	INVOKE_ASYNC(src, .proc/cool_animation, crack_addict)

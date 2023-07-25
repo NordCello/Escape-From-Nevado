@@ -10,9 +10,9 @@
 	. = ..()
 	var/datum/component/babble/babble = owner.current.GetComponent(/datum/component/babble)
 	if(!babble)
-		owner.current.AddComponent(/datum/component/babble, 'modular_septic/sound/voice/babble/inborn.wav')
+		owner.current.AddComponent(/datum/component/babble, 'modular_septic/sound/voice/babble/inborn.ogg')
 	else
-		babble.babble_sound_override = 'modular_septic/sound/voice/babble/inborn.wav'
+		babble.babble_sound_override = 'modular_septic/sound/voice/babble/inborn.ogg'
 		babble.volume = BABBLE_DEFAULT_VOLUME
 		babble.duration = BABBLE_DEFAULT_DURATION
 
@@ -41,9 +41,9 @@
 	ADD_TRAIT(owner.current, TRAIT_DENOMINATOR_ACCESS, SAFEZONE_ACCESS)
 	var/datum/component/babble/babble = owner.current.GetComponent(/datum/component/babble)
 	if(!babble)
-		owner.current.AddComponent(/datum/component/babble, 'modular_septic/sound/voice/babble/denom.wav')
+		owner.current.AddComponent(/datum/component/babble, 'modular_septic/sound/voice/babble/denom.ogg')
 	else
-		babble.babble_sound_override = 'modular_septic/sound/voice/babble/denom.wav'
+		babble.babble_sound_override = 'modular_septic/sound/voice/babble/denom.ogg'
 		babble.volume = BABBLE_DEFAULT_VOLUME
 		babble.duration = BABBLE_DEFAULT_DURATION
 
